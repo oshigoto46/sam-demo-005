@@ -1,0 +1,27 @@
+{
+  "StartAt": "hello world 1",
+  "States": {
+    "hello world 1": {
+      "Type": "Task",
+      "Resource": "${HelloWorldFunction}",
+      "Parameters": {
+        "p1.$": $.p1,
+        "p2.$": "$.p2",
+        "p3": {
+          "p3-1": 20,
+          "p3-2": "xyz"
+        },
+        "all.$": "$"
+      },
+      "ResultPath": "$.hello_world_result",
+      "OutputPath": "$",
+      "Next": "hello world 2"
+    },
+    "hello world 2": {
+      "Type": "Task",
+      "Resource": "${HelloWorldFunction}",
+      "InputPath": "$",
+      "End": true
+    }
+  }
+}
